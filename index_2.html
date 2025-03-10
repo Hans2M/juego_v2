@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <link rel="stylesheet" href="styless/styless_2.css">
+</head>
+
+<body>
+    <div class="bienvenida-container">
+        <h1>¡Bienvenido/a!</h1>
+        <p id="mensajeBienvenida"></p>
+        <div class="juego-container">
+            <p class="juego-texto">¿Quieres jugar un juego?</p>
+            <button class="juego-btn" onclick="iniciarJuego()">Sí, ¡Vamos!</button>
+            <!-- Imagen que aparecerá al hacer clic en "Jugar" -->
+            <img id="juegoImagen" src="" alt="Imagen del juego" class="juego-imagen">
+            <!-- Mensaje de error -->
+            <div id="errorMensaje" class="error-mensaje">
+                ¡Ups! El juego no está disponible en este momento.
+            </div>
+            <!-- Nuevo botón que aparecerá después de hacer clic en "Jugar" -->
+            <button id="intentarBoton" class="intentar-boton" onclick="mostrarConversacion()">Intentar</button>
+        </div>
+    </div>
+
+    <!-- Cuadro de conversación -->
+    <div id="conversacionModal" class="conversacion-modal">
+        <div class="conversacion-contenido">
+            <div class="osito-perfil">
+                <img src="img/osito.gif" alt="Osito">
+                <p>Osito</p>
+            </div>
+            <div class="mensaje-osito">
+                <p>Hola, ¿empecemos de nuevo?</p>
+            </div>
+            <div class="respuesta-usuario">
+                <button id="btnSi" onclick="responderSi()">Sí</button>
+                <button id="btnNo" onclick="responderNo()">No</button>
+            </div>
+            <div id="mensajeFinal" class="mensaje-final">
+                <p>¡Entonces empezemos de una vez!</p>
+                <button id="comenzarBoton" class="comenzar-boton" onclick="mostrarNuevoCuadro()">Comenzemos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuevo cuadro con imagen y botones -->
+    <div id="nuevoCuadro" class="nuevo-cuadro">
+        <div class="nuevo-contenido">
+            <img src="img/osito_1.gif" alt="Imagen central" class="imagen-central">
+            <div class="botones-nuevo">
+                <button id="btnMeGusta" class="btn-me-gusta" onclick="meGusta()">Me gusta</button>
+                <button id="btnJuguemos" class="btn-juguemos" onclick="redirigirAJuego()">Juguemos de una vez</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audios para los sonidos -->
+    <audio id="sonidoJugar" src="music/error.mp3"></audio>
+    <!-- Sonido para "Sí, ¡Vamos!" -->
+    <audio id="sonidoIntentar" src="music/error.mp3"></audio>
+    <!-- Sonido para "Intentar" -->
+    <audio id="sonidoSi" src="music/si.mp3"></audio>
+    <!-- Sonido para "Sí" -->
+    <audio id="sonidoNo" src="music/yea.wav"></audio>
+    <!-- Sonido para "No" -->
+    <audio id="sonidoComenzar" src="music/go.mp3"></audio>
+    <!-- Sonido para "Comenzemos" -->
+    <script>
+        // Recupera los datos del localStorage
+        const nombre = localStorage.getItem('nombre');
+        const apodo = localStorage.getItem('apodo');
+        const sexo = localStorage.getItem('sexo');
+
+        // Muestra el mensaje de bienvenida
+        document.getElementById('mensajeBienvenida').textContent = `Hola ${nombre} (${apodo}), eres ${sexo}. ¡Bienvenido/a!`;
+
+        // Función para iniciar el juego
+        function iniciarJuego() {
+            // Muestra la imagen
+            const juegoImagen = document.getElementById('juegoImagen');
+            juegoImagen.src = "img/osito.gif"; // URL de la imagen
+            juegoImagen.style.display = "block";
+
+            // Reproduce el sonido de "Sí, ¡Vamos!"
+            const sonidoJugar = document.getElementById('sonidoJugar');
+            sonidoJugar.play();
+
+            // Muestra el mensaje de error
+            const errorMensaje = document.getElementById('errorMensaje');
+            errorMensaje.style.display = 'block';
+
+            // Muestra el nuevo botón "Intentar"
+            const intentarBoton = document.getElementById('intentarBoton');
+            intentarBoton.style.display = 'block';
+        }
+
+        // Función para mostrar la conversación
+        function mostrarConversacion() {
+            const conversacionModal = document.getElementById('conversacionModal');
+            conversacionModal.style.display = 'flex';
+
+            // Reproduce el sonido de "Intentar"
+            const sonidoIntentar = document.getElementById('sonidoIntentar');
+            sonidoIntentar.play();
+        }
+
+        // Función para responder "Sí"
+        function responderSi() {
+            const mensajeFinal = document.getElementById('mensajeFinal');
+            mensajeFinal.style.display = 'block';
+            document.getElementById('btnNo').disabled = true; // Deshabilita el botón "No"
+
+            // Reproduce el sonido de "Sí"
+            const sonidoSi = document.getElementById('sonidoSi');
+            sonidoSi.play();
+        }
+
+        // Función para responder "No"
+        function responderNo() {
+            alert("¡Oh no! Debes elegir 'Sí' para continuar.");
+
+            // Reproduce el sonido de "No"
+            const sonidoNo = document.getElementById('sonidoNo');
+            sonidoNo.play();
+        }
+
+        // Función para mostrar el nuevo cuadro
+        function mostrarNuevoCuadro() {
+            // Oculta el cuadro de conversación
+            const conversacionModal = document.getElementById('conversacionModal');
+            conversacionModal.style.display = 'none';
+
+            // Muestra el nuevo cuadro
+            const nuevoCuadro = document.getElementById('nuevoCuadro');
+            nuevoCuadro.style.display = 'flex';
+
+            // Reproduce el sonido de "Comenzemos"
+            const sonidoComenzar = document.getElementById('sonidoComenzar');
+            sonidoComenzar.play();
+        }
+
+        // Función para el botón "Me gusta"
+        function meGusta() {
+            alert("¡Gracias por tu apoyo! 😊");
+        }
+
+        // Función para el botón "Juguemos de una vez"
+        function redirigirAJuego() {
+            window.location.href = "juego.html"; // Redirige a la página del juego
+        }
+    </script>
+</body>
+
+</html>

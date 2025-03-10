@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juguemos</title>
+    <link rel="stylesheet" href="styless/styles_3.css">
+</head>
+
+<body>
+    <div class="juego-container">
+        <h1>¡Es hora de jugar!</h1>
+        <p>Bienvenido/a al juego. ¡Diviértete!</p>
+        <img src="img/goku_3.gif" alt="Imagen del juego" class="juego-imagen">
+
+        <!-- Botón para reproducir música -->
+        <button id="reproducirMusicaBtn" class="musica-btn" onclick="iniciarJuego()">Empezemos 👾</button>
+    </div>
+
+    <!-- Audio para la música de fondo -->
+    <audio id="musicaFondo" loop>
+        <source src="music/juego.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+
+    <script>
+        // Función para iniciar el juego
+        function iniciarJuego() {
+            // Reproduce la música
+            const musicaFondo = document.getElementById('musicaFondo');
+            musicaFondo.play();
+
+            // Oculta el botón de reproducir música
+            document.getElementById('reproducirMusicaBtn').style.display = 'none';
+
+            // Crea mensajes de error en la pantalla
+            crearMensajesError();
+
+            // Después de 6 segundos, cierra la página
+            setTimeout(() => {
+                cerrarPagina();
+            }, 6000); // 6 segundos
+        }
+
+        // Función para crear mensajes de error
+        function crearMensajesError() {
+            const mensajes = [
+                "¡Virus detectado!",
+                "¡Peligro! Sistema comprometido",
+                "Error crítico: Cierre inmediato",
+                "¡Alerta! Archivos corruptos",
+                "¡Advertencia! Infección en curso",
+                "¡Error! Memoria insuficiente",
+                "¡Cuidado! Datos en riesgo",
+                "¡Atención! Sistema infectado",
+                "¡Error! No se puede continuar",
+                "¡Peligro! Desinstalación forzada"
+            ];
+
+            // Crea 50 mensajes de error en posiciones aleatorias
+            for (let i = 0; i < 50; i++) {
+                const mensaje = document.createElement('div');
+                mensaje.className = 'mensaje-error';
+                mensaje.textContent = mensajes[Math.floor(Math.random() * mensajes.length)];
+                mensaje.style.left = `${Math.random() * window.innerWidth}px`;
+                mensaje.style.top = `${Math.random() * window.innerHeight}px`;
+                document.body.appendChild(mensaje);
+            }
+        }
+
+        // Función para cerrar la página
+        function cerrarPagina() {
+            alert("Adiós, gracias por tus datos e información.");
+            window.close(); // Cierra la página
+        }
+    </script>
+</body>
+
+</html>

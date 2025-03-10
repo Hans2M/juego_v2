@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Dinámico</title>
+    <link rel="stylesheet" href="styless/styles.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Formulario de Registro</h1>
+        <form id="registroForm">
+            <div class="form-group">
+                <label for="nombre">Ingresa tu nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apodo">Ingresa tu apodo:</label>
+                <input type="text" id="apodo" name="apodo" required>
+            </div>
+            <div class="form-group">
+                <label>Sexo:</label>
+                <div class="sexo-options">
+                    <label><input type="radio" name="sexo" value="masculino" required> Masculino</label>
+                    <label><input type="radio" name="sexo" value="femenino" required> Femenino</label>
+                </div>
+            </div>
+            <img src="img/goku_3.gif" alt="Imagen decorativa" class="form-image">
+            <button type="submit" class="ingresar-btn">Ingresar</button>
+        </form>
+    </div>
+    <script src="scrypts/scrypt.js"></script>
+</body>
+
+</html>
